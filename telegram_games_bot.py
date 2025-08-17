@@ -807,6 +807,33 @@ def main() -> None:
     print("🚀 Starting Telegram Games Bot...")
     print("Press Ctrl+C to stop the bot")
     
+    # Check if running on Render (has PORT environment variable)
+    import os
+    if os.getenv('PORT'):
+        # Running on Render - start HTTP server for health checks
+        port = int(os.getenv('PORT', 8080))
+        import threading
+        from http.server import HTTPServer, BaseHTTPRequestHandler
+        
+        class HealthHandler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.send_header('Content-type', 'text/plain')
+                self.end_headers()
+                self.wfile.write(b'Telegram Bot is running!')
+                
+            def log_message(self, format, *args):
+                pass  # Suppress HTTP server logs
+        
+        # Start HTTP server in background thread
+        def run_server():
+            server = HTTPServer(('0.0.0.0', port), HealthHandler)
+            print(f"🌐 HTTP server running on port {port} for Render")
+            server.serve_forever()
+        
+        server_thread = threading.Thread(target=run_server, daemon=True)
+        server_thread.start()
+    
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
 
