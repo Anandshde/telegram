@@ -808,7 +808,7 @@ def main() -> None:
     print("Press Ctrl+C to stop the bot")
     
     # Run the bot until the user presses Ctrl-C
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    application.run_polling()
 
 
 if __name__ == '__main__':

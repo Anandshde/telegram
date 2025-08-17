@@ -2,7 +2,7 @@
 # ================================
 
 # Main Telegram bot library
-python-telegram-bot==20.7
+python-telegram-bot==20.3
 
 # Optional: For better random number generation (already using built-in random)
 # numpy==1.24.3
