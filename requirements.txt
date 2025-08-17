@@ -1,0 +1,11 @@
+# Telegram Games Bot Dependencies
+# ================================
+
+# Main Telegram bot library
+python-telegram-bot==20.7
+
+# Optional: For better random number generation (already using built-in random)
+# numpy==1.24.3
+
+# No additional dependencies needed for this simple bot!
+# The bot uses only Python standard library modules except for python-telegram-bot
